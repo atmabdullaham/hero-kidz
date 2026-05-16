@@ -29,9 +29,13 @@ const ProductCard = ({ product }) => {
       {/* Content */}
       <div className="p-5">
         {/* Title */}
-        <h2 className="text-lg font-bold text-gray-800 line-clamp-2">{product.bangla}</h2>
+        <h2 className="text-lg font-bold text-gray-800 line-clamp-2">
+          {product.bangla}
+        </h2>
 
-        <p className="text-sm text-gray-600 mt-1 line-clamp-1">{product.title}</p>
+        <p className="text-sm text-gray-600 mt-1 line-clamp-1">
+          {product.title}
+        </p>
 
         {/* Ratings */}
         <div className="flex items-center gap-2 mt-3">
@@ -47,26 +51,34 @@ const ProductCard = ({ product }) => {
           <span className="text-2xl font-bold text-green-600">
             ৳{Math.round(discountedPrice)}
           </span>
-          <span className="text-gray-400 line-through text-sm">৳{product.price}</span>
+          <span className="text-gray-400 line-through text-sm">
+            ৳{product.price}
+          </span>
         </div>
 
         {/* Short Description */}
-        <p className="text-xs text-gray-600 mt-3 line-clamp-2">
-          {product.description.split('\n')[0]}
-        </p>
+        {product.description && (
+          <p className="text-xs text-gray-600 mt-3 line-clamp-2">
+            {typeof product.description === "string"
+              ? product.description.split("\n")[0]
+              : product.description}
+          </p>
+        )}
 
         {/* Key Features */}
-        <div className="mt-4 space-y-1">
-          <p className="text-xs font-semibold text-gray-700">Key Features:</p>
-          <ul className="text-xs text-gray-600 space-y-1">
-            {product.info.slice(0, 2).map((feature, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <span className="text-green-500 mt-0.5">✓</span>
-                <span className="line-clamp-1">{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {product.info && product.info.length > 0 && (
+          <div className="mt-4 space-y-1">
+            <p className="text-xs font-semibold text-gray-700">Key Features:</p>
+            <ul className="text-xs text-gray-600 space-y-1">
+              {product.info.slice(0, 2).map((feature, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-green-500 mt-0.5">✓</span>
+                  <span className="line-clamp-1">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* CTA Button */}
         <button className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-3 rounded-lg transition-colors">
